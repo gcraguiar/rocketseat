@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Validador de Idade</title>   
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="Digite uma Idade">
+      <button>Verificar</button>
+      </ul>
+    </div>
+    <script src="main.js"></script>     
+    <script>                          
+      var inputElement = document.querySelector('#app input');
+      var buttonElement = document.querySelector('#app button');            
+
+      function validaEvento (evento) {
+        if (evento.which == 13 || evento.keyCode == 13) {
+          return true;
+        }
+        return false;
+      };   
+                       
+      buttonElement.onclick = function() { 
+        checaIdade(inputElement.value, 2000)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error){
+          console.warn(error);
+        });
+      }        
+      
+      inputElement.onkeydown = function() {
+        if (validaEvento(event)) {
+          checaIdade(inputElement.value, 2000)
+            .then(function(response) {
+              console.log(response);
+            })
+            .catch(function(error){
+              console.warn(error);
+          });
+        }
+      }
+
+      inputElement.onkeypress = function() {
+        return onlynumber();
+      }
+
+      function onlynumber(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode( key );
+        //var regex = /^[0-9.,]+$/;
+        var regex = /^[0-9.]+$/;
+        if( !regex.test(key) ) {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+      }
+    </script>
+  </body>
+</html>

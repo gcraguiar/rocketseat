@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercício 05</title>   
+  </head>
+  <body>     
+    <script>                  
+    var usuarios = [  
+      {    
+        nome: "Diego",    
+        habilidades: ["Javascript", "ReactJS", "Redux"]  
+      },  
+      {    
+        nome: "Gabriel",    
+        habilidades: ["VueJS", "Ruby on Rails", "Elixir"]  
+      }
+    ];
+
+    String.prototype.format = function() {      
+      a = this;
+      for (k in arguments) {
+        a = a.replace("{" + k + "}", arguments[k])
+      }
+      return a
+    }
+
+    for (var i = 0; i < usuarios.length; i++){
+        console.log("O {0} possui as habilidades: {1}".format(usuarios[i].nome, usuarios[i].habilidades.join(", ")))
+    }
+    </script>
+  </body>
+</html>

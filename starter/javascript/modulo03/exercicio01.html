@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Pesquisar Repositórios Github</title>   
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="Digite o Usuário">
+      <button>Buscar Repositorios</button>
+      <ul>
+
+      </ul>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>     
+    <script src="main.js"></script>     
+    <script>                          
+      var inputElement = document.querySelector('#app input');
+      var buttonElement = document.querySelector('#app button');
+      var repElement = document.querySelector('#app ul');            
+
+      function validaEvento (evento) {
+        if (evento.which == 13 || evento.keyCode == 13) {
+          return true;
+        }
+        return false;
+      }; 
+
+      function listarRepos(repos) {
+        repElement.innerHTML = null;
+        for (rep of repos) {
+          var repositorio = document.createElement('li');
+          var linkElement = document.createElement('a');
+          var linkText = document.createTextNode(rep.name);
+
+          linkElement.setAttribute('href', rep.html_url);
+          linkElement.appendChild(linkText);
+
+          repositorio.appendChild(linkElement);
+          repElement.appendChild(repositorio);
+        }
+      }
+
+      function carregarRepos() {
+        var user = inputElement.value;
+        repElement.innerHTML = 'Carregando ...';        
+
+        obterRepositorios(user)
+         .then(function(response) {
+          listarRepos(response.data);
+         })
+         .catch(function(error){
+          repElement.innerHTML = null;
+          alert('O usuário: ' + '"' + user + '"' + ' não foi encontrado.');
+         });
+      }
+            
+      buttonElement.onclick = function() {
+        if (inputElement.value === '') {
+          alert('Digite um nome de usuário');
+        } else {
+          carregarRepos();
+        }
+      }        
+      
+      inputElement.onkeydown = function() {
+        if (validaEvento(event)) {
+          if (inputElement.value === '') {
+            alert('Digite um nome de usuário');
+          } else {
+            carregarRepos();
+          }
+        };
+      }      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercicio 04</title>   
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="Digite um Nome">
+      <button>Adicionar</button>
+      <ul class="listNames"> 
+      </ul>
+    </div>    
+    <script>               
+      var initNomes = ["Diego", "Gabriel", "Lucas"];
+      var nomes = JSON.parse(localStorage.getItem('nomes')) || initNomes;      
+  
+      var listElement = document.querySelector('#app ul');
+      var inputElement = document.querySelector('#app input');
+      var buttonElement = document.querySelector('#app button');      
+
+      function renderizarNomes() {
+        listElement.innerHTML = null;
+
+        for (nome of nomes) {
+          var nomeElement = document.createElement('li');
+          var nomeText = document.createTextNode(nome);
+
+          var linkElemente = document.createElement('a');
+          linkElemente.setAttribute('href', '#');
+          linkElemente.onclick = function() {
+            var index = nome.index;
+            excluirNome(index);
+          }
+          var linkText = document.createTextNode('Excluir');
+
+          linkElemente.appendChild(linkText);
+
+
+          nomeElement.appendChild(nomeText);
+          nomeElement.appendChild(linkElemente);
+          listElement.appendChild(nomeElement);
+        }
+      }
+
+      function validaEvento (evento) {
+        if (evento.which == 13 || evento.keyCode == 13) {
+          return true;
+        }
+        return false;
+      };      
+      
+      function adicionarNome() {
+        if (inputElement.value != "") {
+          var nome = inputElement.value;
+          nomes.push(nome);
+          inputElement.value = null;
+          inputElement.focus();
+          renderizarNomes();                   
+          saveToStorage(); 
+        } 
+        else {
+          alert('Informe o nome.');
+          inputElement.focus();
+        } 
+      }
+
+      function excluirNome (index) {
+        nomes.splice(index, 1);
+        renderizarNomes();
+        saveToStorage();
+      }
+
+      function saveToStorage() {
+        localStorage.setItem('nomes', JSON.stringify(nomes));
+      }
+
+      buttonElement.onclick = function() {        
+          adicionarNome();        
+      }
+
+      inputElement.onkeydown = function() {
+        if (validaEvento(event)) {
+          adicionarNome();
+        }
+      }
+
+      renderizarNomes();
+
+    </script>
+  </body>
+</html>

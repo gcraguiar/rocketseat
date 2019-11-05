@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercicio 02</title>   
+  </head>
+  <body>
+    <div id="app">
+      <button onclick="criarElemento(), style.marginBottom = 10 ">Criar Novo Elemento</button>
+      <div class="box"></div>      
+    </div>    
+    <script>               
+      function criarElemento() {
+          var boxElement = document.createElement("div");  
+
+          boxElement.style.width = 100; 
+          boxElement.style.height = 100;
+          boxElement.style.backgroundColor = '#f00';
+          boxElement.style.marginBottom = 10; 
+          boxElement.addEventListener('mouseover', function() { 
+            this.style.backgroundColor = getRandomColor(); 
+          });      
+          document.querySelector('.box').appendChild(boxElement); 
+      }        
+
+      function getRandomColor() {  
+        var letters = "0123456789ABCDEF";  
+        var color = "#";  
+        for (var i = 0; i < 6; i++) {    
+          color += letters[Math.floor(Math.random() * 16)];  
+        }  
+        return color;
+      }
+
+    </script>
+  </body>
+</html>

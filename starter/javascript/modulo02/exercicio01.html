@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercicio 01</title>   
+  </head>
+  <body>
+    <div id="app">
+      <button onclick="criarElemento() , style.marginBottom = 10 ">Criar Novo Elemento</button>
+      <div class="box"></div>      
+    </div>    
+    <script>               
+      function criarElemento() {
+          var boxElement = document.createElement("div");  
+
+          boxElement.style.width = 100; 
+          boxElement.style.height = 100;
+          boxElement.style.backgroundColor = '#f00';
+          boxElement.style.marginBottom = 10;                    
+
+          document.querySelector('.box').appendChild(boxElement); 
+      }       
+    </script>
+  </body>
+</html>

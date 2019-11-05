@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercício 01</title>   
+  </head>
+  <body>    
+    <script>
+    var endereco = {
+      Rua: '"Rua dos pinheiros"',
+      Numero: 1293,
+      Bairro: "Centro",
+      Cidade: "São Paulo",
+      Uf: "SP"
+    };
+    
+    String.prototype.format = function() {      
+      a = this;
+      for (k in arguments) {
+        a = a.replace("{" + k + "}", arguments[k])
+      }
+      return a
+    }
+
+    function obterEnderecoCompleto(){
+      return "O usuário mora em {0} / {1}, no bairro {2}, na rua {3} com nº {4}."
+      .format(endereco.Cidade, endereco.Uf, endereco.Bairro, endereco.Rua, endereco.Numero);  
+    }    
+
+    console.log(obterEnderecoCompleto());
+    </script>
+  </body>
+</html>

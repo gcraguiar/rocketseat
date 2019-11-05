@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Curso JavaScript - Exercicio 03</title>   
+  </head>
+  <body>
+    <div class="listaNomes">
+      <ul id="nome"> 
+      </ul>
+    </div>    
+    <script>               
+      var nomes = ["Diego", "Gabriel", "Lucas"];
+
+      var inputList = document.getElementById("nome");      
+      for (var i = 0; i < nomes.length; i++) {
+        const item = document.createElement('li');
+        item.innerHTML = nomes[i];      
+        inputList.append(item);
+      }
+      inputList
+    </script>
+  </body>
+</html>
